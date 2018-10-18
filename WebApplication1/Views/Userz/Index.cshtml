@@ -1,0 +1,54 @@
+﻿@model Dictionary<string, List<string>>
+@{
+        ViewData["Title"] = "Index";
+    }
+
+<h2 class="text-center">Manage User Roles</h2>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                UID
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                Email
+            </th>            
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+{
+        <tr>
+            <th>
+                @item.Key
+            </th>
+            
+            @foreach (var x in item.Value)
+            {
+                <th>
+                    @x
+                </th>
+            }
+                <td>
+                    <a asp-action="Create" asp-route-key="@item.Key">Edit</a>
+                    @if (item.Key == ViewBag.masterKey)
+                    {
+                        //dont allow deletion 
+                    }
+                    else
+                    {
+                        <a asp-action="Delete" asp-route-key="@item.Key">Delete</a>
+                    }
+                </td>
+        </tr>
+        }
+    </tbody>
+</table>

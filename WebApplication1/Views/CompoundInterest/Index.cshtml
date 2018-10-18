@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "About";
+}
+<h2 class="text-center">Compound Interest Calculator</h2>
+<h3 class="text-center"><em>TIME TO CALCULATE</em></h3>
+
+<p>Use this area to provide additional information.</p>
+
+<form asp-action="Results">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        Interest Rate: <input type="number" step="any" name="interestRate" /><br />
+    </div>
+    <div class="form-group">
+        Principal: <input type="number" step="any" name="principal" /><br />
+    </div>
+    <div class="form-group">
+        Times Per Year: <input type="number" step="any" name="timesPerYear" /><br />
+    </div>
+    <div class="form-group">
+        Years: <input type="number"  step="any" name="years" /><br />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="calculate" class="btn btn-default" />
+    </div>
+</form>
+
+<!-- <div class="form-group">
+                <label asp-for="Input.Street"></label>
+                <input asp-for="Input.Street" class="form-control" />
+                <span asp-validation-for="Input.Street" class="text-danger"></span>
+            </div>-->

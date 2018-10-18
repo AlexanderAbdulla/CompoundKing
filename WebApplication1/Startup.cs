@@ -12,11 +12,17 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebApplication1.Models;
+using WebApplication1.Controllers;
 
 namespace WebApplication1
 {
+
     public class Startup
     {
+        public static ApplicationDbContext globalContext;
+
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -37,14 +43,26 @@ namespace WebApplication1
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+          //  services.AddDefaultIdentity<IdentityUser>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, ApplicationRole>(
+    options => options.Stores.MaxLengthForKeys = 128)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultUI()
+    .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //services.AddSingleton<IConfiguration>(Configuration);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
+            ApplicationDbContext context,
+             RoleManager<ApplicationRole> roleManager,
+             UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +87,12 @@ namespace WebApplication1
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            globalContext = context;
+           // HomeController.context = context; 
+            DummyData.Initialize(context, userManager, roleManager).Wait();
+            
         }
+
+        
     }
 }

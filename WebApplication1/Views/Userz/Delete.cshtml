@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Delete Role";
+}
+
+<h2>Delete Roles</h2>
+
+<h4>You Are Viewing:  @ViewBag.username </h4>
+<hr />
+<h4>This User Has The Following Roles: </h4>
+<ul>
+    @foreach (var item in ViewBag.rolesToDelete)
+    {
+        <li>
+            @item
+        </li>
+    }
+</ul>
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.rolesToDelete.Count == 0)
+        {
+            <h4 class="alert-danger text-center">You have no roles yet!!</h4>
+        }
+        else
+        {
+        <form method="post">
+            <div class="form-group">
+            </div>
+            <input type="text" name="UserID" value="@ViewBag.uid" style="display: none" />
+            <select name="Role">
+                @foreach (var item in ViewBag.rolesToDelete)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+            <div class="form-group">
+                <br />
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        </form>
+        }
+        <a href="~/Userz">Back To Userz Index</a>
+    </div>
+</div>

@@ -3,13 +3,32 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using WebApplication1.Data;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
+       
+       public static ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
+
+
+            
+        public HomeController(ApplicationDbContext context)
+        {
+            //DbContextOptions<ApplicationDbContext> options
+            _context = context;
+        }
+        
+
+
         public IActionResult Index()
         {
             return View();
@@ -31,6 +50,17 @@ namespace WebApplication1.Controllers
 
         public IActionResult Privacy()
         {
+
+                
+            
+                /*
+                foreach (var item in _context.UserRoles)
+                {
+                    Debug.WriteLine("WRITNG DIS SHIT" + item.RoleId);
+                }
+                */
+            
+
             return View();
         }
 
