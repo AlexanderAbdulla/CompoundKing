@@ -3,6 +3,13 @@
     ViewData["Title"] = "Results";
 }
 
+@if (!User.Identity.IsAuthenticated)
+{
+    <h2 class="text-danger text-center">YOU NEED TO LOG IN TO ACCESS THIS PAGE</h2>
+}
+else
+{
 <h2>Results</h2>
 
 <h3>The compound interest is: @ViewBag.compoundInterest</h3>
+}

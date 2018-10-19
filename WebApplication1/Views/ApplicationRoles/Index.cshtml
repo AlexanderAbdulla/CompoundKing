@@ -4,6 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
+@if (!User.Identity.IsAuthenticated)
+{
+    <h2 class="text-danger text-center">YOU NEED TO LOG IN TO ACCESS THIS PAGE</h2>
+}
+else
+{
 <h2 class="text-center">Manage Roles</h2>
 
 <p class="text-center">
@@ -31,37 +37,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NormalizedName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConcurrencyStamp)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NormalizedName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConcurrencyStamp)
+                </td>
+                <td>
 
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                @if (item.Name == "Member" || item.Name == "Admin")
-                {
-                    // DONT DISPLAY DELETE
-                }
-                else
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>  
-                    <a asp-action = "Delete" asp-route-id = "@item.Id"> Delete </a>
-                }
-            </td>
-        </tr>
-}
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    @if (item.Name == "Member" || item.Name == "Admin")
+                    {
+                        // DONT DISPLAY DELETE
+                    }
+                    else
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id"> Delete </a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+}

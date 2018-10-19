@@ -1,7 +1,14 @@
 ﻿@model Dictionary<string, List<string>>
 @{
-        ViewData["Title"] = "Index";
-    }
+    ViewData["Title"] = "Index";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <h2 class="text-danger text-center">YOU NEED TO LOG IN TO ACCESS THIS PAGE</h2>
+}
+else
+{
 
 <h2 class="text-center">Manage User Roles</h2>
 
@@ -18,37 +25,38 @@
             </th>
             <th>
                 Email
-            </th>            
+            </th>
 
 
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
-{
-        <tr>
-            <th>
-                @item.Key
-            </th>
-            
-            @foreach (var x in item.Value)
-            {
+        {
+            <tr>
                 <th>
-                    @x
+                    @item.Key
                 </th>
-            }
+
+                @foreach (var x in item.Value)
+                {
+                    <th>
+                        @x
+                    </th>
+                }
                 <td>
                     <a asp-action="Create" asp-route-key="@item.Key">Edit</a>
                     @if (item.Key == ViewBag.masterKey)
                     {
-                        //dont allow deletion 
+                        //dont allow deletion
                     }
                     else
                     {
                         <a asp-action="Delete" asp-route-key="@item.Key">Delete</a>
                     }
                 </td>
-        </tr>
+            </tr>
         }
     </tbody>
 </table>
+}

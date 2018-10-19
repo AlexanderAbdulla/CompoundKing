@@ -2,10 +2,20 @@
 @{
     ViewData["Title"] = "About";
 }
+
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <h2 class="text-danger text-center">YOU NEED TO LOG IN TO ACCESS THIS PAGE</h2>
+}
+else
+{
+
 <h2 class="text-center">Compound Interest Calculator</h2>
 <h3 class="text-center"><em>TIME TO CALCULATE</em></h3>
 
 <p>Use this area to provide additional information.</p>
+
 
 <form asp-action="Results">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -24,12 +34,13 @@
     <div class="form-group">
         Years: 
         <input type="number" step="any" name="years" /><br />
+
     </div>
     <div class="form-group">
         <input type="submit" value="calculate" class="btn btn-default" />
     </div>
 </form>
-
+}
 <!-- <div class="form-group">
                 <label asp-for="Input.Street"></label>
                 <input asp-for="Input.Street" class="form-control" />
