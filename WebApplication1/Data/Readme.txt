@@ -1,3 +1,4 @@
+Group Members:
 Alex Abdulla
 A00541112
 alexander.amadeus.abdulla@gmail.com
@@ -10,3 +11,6 @@ maggiejieyao@gmail.com
 
 Azure url for the project: 
 https://compoundkingtest.azurewebsites.net/
+
+Major chanllenges:
+We are not familiar to the usage of model and controllers in mvc model, it took us time to find how to connect the roles and users.
