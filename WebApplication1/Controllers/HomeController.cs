@@ -23,7 +23,6 @@ namespace WebApplication1.Controllers
             
         public HomeController(ApplicationDbContext context)
         {
-            //DbContextOptions<ApplicationDbContext> options
             _context = context;
         }
         
@@ -50,16 +49,6 @@ namespace WebApplication1.Controllers
 
         public IActionResult Privacy()
         {
-
-                
-            
-                /*
-                foreach (var item in _context.UserRoles)
-                {
-                    Debug.WriteLine("WRITNG DIS SHIT" + item.RoleId);
-                }
-                */
-            
 
             return View();
         }

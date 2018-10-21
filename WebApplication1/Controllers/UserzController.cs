@@ -95,8 +95,6 @@ namespace WebApplication1.Controllers
         {
 
 
-           // Debug.WriteLine("username is + " + UserID);
-            //Debug.WriteLine("role is + " + Role);
 
             if (_context.Users.Find(UserID) != null)
             {
@@ -105,9 +103,7 @@ namespace WebApplication1.Controllers
 
             await _userManager.RemoveFromRoleAsync(_context.Users.Find(UserID), Role);
 
-            //await _userManager.RemoveFromRoleAsync(_context.Users.Find(UserID), Role);
-            //return View(applicationRole);
-
+            
             await _context.SaveChangesAsync();
             return View("~/Views/Userz/Deleted.cshtml");
         }
@@ -125,19 +121,13 @@ namespace WebApplication1.Controllers
             List<string> rolesAlreadyAdded = new List<string>();
 
 
-            //public async Task<IActionResult> DeleteConfirmed(string id)
-
+            
             foreach (var role in _context.Roles)
             {
                 if(_context.UserRoles.Find(uid, role.Id) == null)
                 {
                     rolesToAdd.Add(role.Name);
-                    Debug.WriteLine("we can add " + role.Name);
-
-                       // await _userManager.AddToRoleAsync(_context.Users.Find(uid), role.Name);
-                    
-                       // Debug.WriteLine("We couldnt add " + role.Name);
-                    
+        
                    
                 } else
                 {
@@ -147,13 +137,11 @@ namespace WebApplication1.Controllers
                 }
             }
 
-            //await _userManager.AddToRoleAsync(_context.Users.Find(uid), "HAR");
             
             ViewBag.uid = uid;
             ViewBag.username = username;
             ViewBag.rolesToAdd = rolesToAdd;
             ViewBag.rolesAlreadyAdded = rolesAlreadyAdded;
-            //Viewbag array 
            
 
             return View();
@@ -177,8 +165,6 @@ namespace WebApplication1.Controllers
 
             await _userManager.AddToRoleAsync(_context.Users.Find(UserID), Role);
 
-            //await _userManager.RemoveFromRoleAsync(_context.Users.Find(UserID), Role);
-            //return View(applicationRole);
 
             await _context.SaveChangesAsync();
             return View("~/Views/Userz/Created.cshtml");

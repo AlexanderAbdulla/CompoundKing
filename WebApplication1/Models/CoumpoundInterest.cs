@@ -9,7 +9,7 @@ namespace WebApplication1.Models
     {
         public CoumpoundInterest(double interestRate, double principal, double timesPerYear, double years)
         {
-            this.interestRate = interestRate;
+            this.interestRate = interestRate /100;
             this.principal = principal;
             this.timesPerYear = timesPerYear;
             this.years = years;
@@ -17,9 +17,10 @@ namespace WebApplication1.Models
 
         public double CalculateCompoundnInterest()
         {
+
             double body = 1 + (interestRate / timesPerYear);
             double exponent = timesPerYear * years;
-            return principal * Math.Pow(body, exponent);
+            return principal * Math.Round(Math.Pow(body, exponent), 2);
         }
 
         public double interestRate { get; set; }
